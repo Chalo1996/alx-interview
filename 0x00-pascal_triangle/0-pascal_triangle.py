@@ -17,13 +17,14 @@ def pascal_triangle(n):
     Args:
         n (int): The number of rows of the triangle.
     """
-    for i in range(n - 1):
-        if (n <= 0):
-            return []
-        temp = [0] + triangle[-1] + [0]
-        row = list()
-        for j in range(len(triangle[-1]) + 1):
-            sumNextVal = temp[j] + temp[j + 1]
-            row.append(sumNextVal)
-        triangle.append(row)
-    return triangle
+    if n <= 0:
+        return list()
+    else:
+        for i in range(n - 1):
+            temp = [0] + triangle[-1] + [0]
+            row = list()
+            for j in range(len(triangle[-1]) + 1):
+                sumNextVal = temp[j] + temp[j + 1]
+                row.append(sumNextVal)
+            triangle.append(row)
+        return triangle
