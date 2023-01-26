@@ -18,6 +18,8 @@ def pascal_triangle(n):
         n (int): The number of rows of the triangle.
     """
     for i in range(n - 1):
+        if (n <= 0):
+            return []
         temp = [0] + triangle[-1] + [0]
         row = list()
         for j in range(len(triangle[-1]) + 1):
