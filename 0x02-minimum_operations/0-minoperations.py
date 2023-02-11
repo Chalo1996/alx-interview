@@ -4,7 +4,7 @@
 
 def minOperations(n: int) -> int:
     """
-    minOperations - calculates the fewest number of operations for \
+    minOperations: calculates the fewest number of operations for \
         copy and paste to result in exactly n H characters in the file.
 
     @n: the number of H characters in the file.
