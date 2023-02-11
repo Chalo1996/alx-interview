@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""0-minoperations module"""
+#!/usr/bin/python3
+"""0-minoperations module."""
 
 
 def minOperations(n: int) -> int:
