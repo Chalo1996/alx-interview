@@ -14,8 +14,8 @@ def minOperations(n: int) -> int:
     if (n <= 0):
         return 0
 
-    countMinOps: int = 0
-    i: int = 2
+    countMinOps = 0
+    i = 2
     while (i <= n):
         while (n % i == 0):
             countMinOps += i
