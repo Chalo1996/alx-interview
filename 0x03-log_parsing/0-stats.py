@@ -6,7 +6,7 @@ import signal
 from typing import Dict
 
 
-def print_stats(signum: int, frame) -> None:
+def print_stats(_: int, __: int) -> None:
     """Signal handler function to print statistics.
 
     Prints the total file size and the number of lines with each
