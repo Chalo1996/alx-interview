@@ -35,7 +35,7 @@ for i, line in enumerate(sys.stdin):
         parts = line.split()
         file_size = int(parts[-1])
         status_code = int(parts[-2])
-    except:
+    except BaseException:
         continue
 
     total_size += file_size
