@@ -11,7 +11,7 @@ status_counts = {}
 
 def print_stats(signum, frame):
     """Prints statistics for the current state of the program."""
-    print("Total file size: {}".format(total_size))
+    print("File size: {}".format(total_size))
     for status_code in sorted(status_counts.keys()):
         print("{}: {}".format(status_code, status_counts[status_code]))
 
@@ -25,7 +25,7 @@ for i, line in enumerate(sys.stdin):
         parts = line.split()
         file_size = int(parts[-1])
         status_code = int(parts[-2])
-    except:
+    except BaseException:
         continue
 
     total_size += file_size
