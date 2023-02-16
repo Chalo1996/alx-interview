@@ -1,19 +1,20 @@
 #!/usr/bin/python3
+"""Script that reads stdin line by line and computes metrics."""
 
 import sys
 import signal
+from typing import Dict
 
 
-# Define a signal handler function to print statistics
-def print_stats(signum, frame):
-    """
-    print_stats _summary_
+def print_stats(signum: int, frame) -> None:
+    """Signal handler function to print statistics.
 
-    _extended_summary_
+    Prints the total file size and the number of lines with each
+    status code, sorted in ascending order.
 
     Args:
-        signum (_type_): _description_
-        frame (_type_): _description_
+        signum (int): The signal number (ignored).
+        frame: The current stack frame (ignored).
     """
     global total_size, status_counts
 
@@ -22,32 +23,25 @@ def print_stats(signum, frame):
         print(f"{status_code}: {status_counts[status_code]}")
 
 
-# Set the signal handler for SIGINT (CTRL+C)
 signal.signal(signal.SIGINT, print_stats)
 
-# Initialize counters
-total_size = 0
-status_counts = {}
+total_size: int = 0
+status_counts: Dict[int, int] = {}
 
-# Read input from standard input line by line
 for i, line in enumerate(sys.stdin):
     line = line.strip()
 
-    # Parse line and extract file size and status code
     try:
         parts = line.split()
         file_size = int(parts[-1])
         status_code = int(parts[-2])
-    except BaseException:
+    except:
         continue
 
-    # Update counters
     total_size += file_size
     status_counts[status_code] = status_counts.get(status_code, 0) + 1
 
-    # Print statistics every 10 lines
     if (i + 1) % 10 == 0:
         print_stats(None, None)
 
-# Print final statistics
 print_stats(None, None)
