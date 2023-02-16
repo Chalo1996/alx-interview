@@ -3,10 +3,18 @@
 import sys
 import signal
 
+
 # Define a signal handler function to print statistics
-
-
 def print_stats(signum, frame):
+    """
+    print_stats _summary_
+
+    _extended_summary_
+
+    Args:
+        signum (_type_): _description_
+        frame (_type_): _description_
+    """
     global total_size, status_counts
 
     print("Total file size:", total_size)
