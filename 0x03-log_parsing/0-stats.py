@@ -1,15 +1,10 @@
-#!/usr/bin/env python3
-"""0-stats module. Reads stdin line by line and computes metrics."""
-
+#!/usr/bin/python3
 
 import sys
 import signal
-from typing import Dict
 
 # Define a signal handler function to print statistics
-
-
-def print_stats(signum: int, frame) -> None:
+def print_stats(signum, frame):
     global total_size, status_counts
 
     print("Total file size:", total_size)
@@ -21,8 +16,8 @@ def print_stats(signum: int, frame) -> None:
 signal.signal(signal.SIGINT, print_stats)
 
 # Initialize counters
-total_size: int = 0
-status_counts: Dict[int, int] = {}
+total_size = 0
+status_counts = {}
 
 # Read input from standard input line by line
 for i, line in enumerate(sys.stdin):
@@ -33,7 +28,7 @@ for i, line in enumerate(sys.stdin):
         parts = line.split()
         file_size = int(parts[-1])
         status_code = int(parts[-2])
-    except BaseException:
+    except:
         continue
 
     # Update counters
