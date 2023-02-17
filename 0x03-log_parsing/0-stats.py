@@ -1,34 +1,38 @@
 #!/usr/bin/python3
 """Script that reads stdin line by line and computes metrics."""
 
-
 import sys
 import re
 
-total_size = 0  # total size of all files
-num_lines_by_status_code = {}
 
-# Read stdin line by line
-for line in sys.stdin:
-    line = sys.stdin.readline()
-    match = re.search(r'^ (\S + ) - \[(.*?)\] "(.*?)" (\d+) (\S + )', line)
-    if match:
-        status_code = match.group(4)
-        file_size = match.group(5)
-        if not status_code.isdigit():
-            continue
+status_counts = {
+    200: 0,
+    301: 0,
+    400: 0,
+    401: 0,
+    403: 0,
+    404: 0,
+    405: 0,
+    500: 0}
 
-        # Sum up file sizes for each valid line
-        file_size = int(file_size)
-        total_size += file_size
+total_size = 0
 
-        # Increment number of lines by status code
-        if status_code not in num_lines_by_status_code:
-            num_lines_by_status_code[status_code] = 0
-        num_lines_by_status_code[status_code] += 1
+while True:
+    for line in sys.stdin:
+        match = re.search(r'^(\S+) - \[(.*?)\] "(.*?)" (\d+) (\S+)', line)
 
-        # Print the output after every 10 lines or a keyboard interruption
-        if (sys.stdin.readline() % 10 == 0) and sys.stdin.isatty():
-            print("Total file size: {}".format(total_size))
-            for k, v in sorted(num_lines_by_status_code.items()):
-                print("{}: {}".format(k, v))
+        if match:
+            try:
+                status = match.group(4)
+                size = match.group(5)
+
+                if status in status_counts:
+                    status_counts[status] += 1
+                    total_size += size
+
+            except ValueError:
+                continue
+
+    print('File size: %d' % total_size)
+    for key in sorted(status_counts):
+        print('%d: %d' % (key, status_counts[key]))
