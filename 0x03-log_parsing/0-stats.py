@@ -1,38 +1,41 @@
 #!/usr/bin/python3
 """Script that reads stdin line by line and computes metrics."""
 
+
 import sys
-import re
 
 
-status_counts = {
-    200: 0,
-    301: 0,
-    400: 0,
-    401: 0,
-    403: 0,
-    404: 0,
-    405: 0,
-    500: 0}
+status_dict = {
+    '200': 0,
+    '301': 0,
+    '400': 0,
+    '401': 0,
+    '403': 0,
+    '404': 0,
+    '405': 0,
+    '500': 0}
 
 total_size = 0
 
 while True:
     for line in sys.stdin:
-        match = re.search(r'^(\S+) - \[(.*?)\] "(.*?)" (\d+) (\S+)', line)
+        line = line.strip()
+        line = line.split()
 
-        if match:
+        if len(line) > 2:
             try:
-                status = match.group(4)
-                size = match.group(5)
+                status = line[-2]
+                size = line[-1]
 
-                if status in status_counts:
-                    status_counts[status] += 1
-                    total_size += size
+                for k, v in status_dict.items():
+                    if status == k:
+                        status_dict[k] += 1
+                        total_size += int(size)
+                print('File size: {}'.format(total_size))
+                for key in sorted(status_dict):
+                    print('{}: {}'.format(key, status_dict[key]))
 
-            except ValueError:
-                continue
-
-    print('File size: %d' % total_size)
-    for key in sorted(status_counts):
-        print('%d: %d' % (key, status_counts[key]))
+            except KeyboardInterrupt:
+                print('File size: {}'.format(total_size))
+                for key in sorted(status_dict):
+                    print('{}: {}'.format(key, status_dict[key]))
