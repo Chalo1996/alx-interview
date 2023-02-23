@@ -2,9 +2,6 @@
 """0-validate_utf8 module."""
 
 
-from typing import List
-
-
 def validUTF8(data):
     # type: (List[int]) -> bool
     """
