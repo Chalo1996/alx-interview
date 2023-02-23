@@ -2,7 +2,10 @@
 """0-validate_utf8 module."""
 
 
-def validUTF8(data):
+from typing import List
+
+
+def validUTF8(data: List[int]) -> bool:
     """
     validUTF8: determines if a given data set represents a valid \
         UTF-8 encoding.
@@ -11,7 +14,7 @@ def validUTF8(data):
         data: list of integers.
     """
 
-    num_bytes = 0
+    num_bytes: int = 0
     for num in data:
         if num_bytes == 0:
             if (num >> 5) == 0b110:
