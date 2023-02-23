@@ -25,9 +25,12 @@ def validUTF8(data: List[Union[int, Any]]) -> bool:
             if not validUTF8(d):
                 return False
             return True
-    else:
+    elif isinstance(data, str) or isinstance(data, bytes):
         try:
-            d.encode('utf-8').decode('utf-8')
+            data.encode('utf-8').decode('utf-8')
             return True
         except UnicodeDecodeError:
             return False
+
+    else:
+        return False
