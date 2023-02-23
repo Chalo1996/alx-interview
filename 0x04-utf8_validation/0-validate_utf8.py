@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-"""0-validate_utf8 module"""
-
+"""0-validate_utf8 module."""
 
 from typing import List, Union, Any
 
