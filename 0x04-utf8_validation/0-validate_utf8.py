@@ -1,10 +1,8 @@
 #!/usr/bin/python3
 """0-validate_utf8 module."""
 
-from typing import List, Union, Any
 
-
-def validUTF8(data: List[Union[int, Any]]) -> bool:
+def validUTF8(data) -> bool:
     """
     validUTF8: determines if a given data set represents a valid \
         UTF-8 encoding.
@@ -19,7 +17,6 @@ def validUTF8(data: List[Union[int, Any]]) -> bool:
             return True
         except UnicodeDecodeError:
             return False
-
     elif isinstance(data, list):
         for d in data:
             if not validUTF8(d):
