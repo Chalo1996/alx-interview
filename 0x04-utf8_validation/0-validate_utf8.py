@@ -2,10 +2,8 @@
 """0-validate_utf8 module."""
 
 
-from typing import List, Union, Any
-
-
-def validUTF8(data: Union[str, int, bytes, List[Any]]) -> bool:
+# type: Union[bytes, str, int, List[Union[bytes, str]]] -> bool
+def validUTF8(data):
     """
     validUTF8: determines if a given data set represents a valid \
         UTF-8 encoding.
