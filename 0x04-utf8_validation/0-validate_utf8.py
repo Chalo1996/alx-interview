@@ -2,7 +2,6 @@
 """0-validate_utf8 module."""
 
 
-# type: Union[bytes, str, int, List[Union[bytes, str]]] -> bool
 def validUTF8(data):
     """
     validUTF8: determines if a given data set represents a valid \
@@ -11,24 +10,20 @@ def validUTF8(data):
     Args:
         data: list of integers.
     """
-    if isinstance(data, int):
-        try:
-            data.to_bytes((data.bit_length() + 7) // 8,
-                          byteorder='big').decode('utf-8')
-            return True
-        except UnicodeDecodeError:
-            return False
-    elif isinstance(data, list):
-        for d in data:
-            if not validUTF8(d):
-                return False
-            return True
-    elif isinstance(data, str) or isinstance(data, bytes):
-        try:
-            data.encode('utf-8').decode('utf-8')
-            return True
-        except UnicodeDecodeError:
-            return False
 
-    else:
-        return False
+    num_bytes = 0
+    for num in data:
+        if num_bytes == 0:
+            if (num >> 5) == 0b110:
+                num_bytes = 1
+            elif (num >> 4) == 0b1110:
+                num_bytes = 2
+            elif (num >> 3) == 0b11110:
+                num_bytes = 3
+            elif (num >> 7):
+                return False
+        else:
+            if (num >> 6) != 0b10:
+                return False
+            num_bytes -= 1
+    return num_bytes == 0
