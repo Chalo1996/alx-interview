@@ -18,10 +18,15 @@ def canUnlockAll(boxes):
     unlockedBoxes[0] = True
     keys = boxes[0]
 
+    # Check if you still have keys to unlock boxes
     while len(keys) > 0:
+        # Pick a key and to open the box to that key
         key = keys.pop()
+        # Check if the box is locked and unlock it
         if not unlockedBoxes[key]:
             unlockedBoxes[key] = True
+            # Add the keys in the box to the list of keys
             keys.extend(boxes[key])
 
+    # Return True if all boxes are unlocked
     return all(unlockedBoxes)
