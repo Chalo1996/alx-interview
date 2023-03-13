@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 """0-pascal_triangle."""
 
-triangle = list()
+
+from typing import List
+
+
+triangle: List[List[int]] = list()
 triangle.append([1])
 
 
-def pascal_triangle(n):
+def pascal_triangle(n: int) -> List[List[int]]:
     """
     Return a list of lists of intergers representing the Pascal's Triangle.
 
@@ -21,10 +25,10 @@ def pascal_triangle(n):
         return list()
     else:
         for i in range(n - 1):
-            temp = [0] + triangle[-1] + [0]
-            row = list()
+            temp: List[int] = [0] + triangle[-1] + [0]
+            row: List[int] = list()
             for j in range(len(triangle[-1]) + 1):
-                sumNextVal = temp[j] + temp[j + 1]
+                sumNextVal: int = temp[j] + temp[j + 1]
                 row.append(sumNextVal)
             triangle.append(row)
         return triangle
