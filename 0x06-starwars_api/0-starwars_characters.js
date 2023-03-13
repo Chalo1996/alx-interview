@@ -8,15 +8,22 @@ request(url, (err, res, body) => {
   if (err) {
     console.log(err);
   } else {
-    const charactersUrl = JSON.parse(body).characters;
-    charactersUrl.map((characterUrl) => {
-      request(characterUrl, (err, res, body) => {
+    const charactersUrls = JSON.parse(body).characters;
+
+    function getCharacterByName (charactersUrls) {
+      if (charactersUrls.length === 0) {
+        return;
+      }
+      const url = charactersUrls.shift();
+      request(url, (err, res, body) => {
         if (err) {
           console.log(err);
         } else {
           console.log(JSON.parse(body).name);
         }
+        getCharacterByName(charactersUrls);
       });
-    });
+    }
+    getCharacterByName(charactersUrls);
   }
 });
