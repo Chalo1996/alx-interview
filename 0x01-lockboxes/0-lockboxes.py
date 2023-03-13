@@ -22,6 +22,8 @@ def canUnlockAll(boxes):
     while len(keys) > 0:
         # Pick a key and to open the box to that key
         key = keys.pop()
+        if not isinstance(key, int) or key >= len(boxes) or key < 0:
+            continue
         # Check if the box is locked and unlock it
         if not unlockedBoxes[key]:
             unlockedBoxes[key] = True
