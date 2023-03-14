@@ -22,13 +22,3 @@ def rotate_2d_matrix(matrix: List[List[int]]) -> None:
     for i in range(len(matrix)):
         for j in range(len(matrix)):
             matrix[i][j] = new_matrix[i][len(matrix) - 1 - j]
-
-    for row in matrix:
-        print(row)
-
-
-if __name__ == '__main__':
-    matrix = [[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]]
-    rotate_2d_matrix(matrix)
