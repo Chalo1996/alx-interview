@@ -2,10 +2,7 @@
 """2D Matrix Rotation module."""
 
 
-from typing import List
-
-
-def rotate_2d_matrix(matrix: List[List[int]]) -> None:
+def rotate_2d_matrix(matrix):
     """Rotate a 2D matrix 90 degrees clockwise.
 
     Args:
@@ -14,7 +11,7 @@ def rotate_2d_matrix(matrix: List[List[int]]) -> None:
     Returns:
         None.
     """
-    new_matrix: List[List[int]] = []
+    new_matrix = []
     for i in range(len(matrix)):
         new_matrix.append([])
         for j in range(len(matrix)):
