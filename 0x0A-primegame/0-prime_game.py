@@ -36,10 +36,10 @@ def isWinner(x, nums):
                 multiples = set(range(p, n + 1, p))
                 nums -= multiples
                 if not nums:
-                    return "Ben"
+                    return "Maria"
                 primes = [q for q in primes if q not in multiples]
                 if not primes:
-                    return "Maria"
+                    return "Ben"
 
     winners = [game(n) for n in nums]
     maria_wins = winners.count("Maria")
