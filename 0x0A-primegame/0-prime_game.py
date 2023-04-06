@@ -45,8 +45,8 @@ def isWinner(x, nums):
     maria_wins = winners.count("Maria")
     ben_wins = winners.count("Ben")
     if maria_wins > ben_wins:
-        return "Ben"
-    elif ben_wins > maria_wins:
         return "Maria"
+    elif ben_wins > maria_wins:
+        return "Ben"
     else:
         return None
