@@ -41,9 +41,15 @@ def isWinner(x, nums):
                 if not primes:
                     return "Ben"
 
-    winners = [game(n) for n in nums]
-    maria_wins = winners.count("Maria")
-    ben_wins = winners.count("Ben")
+    maria_wins = 0
+    ben_wins = 0
+    for i in range(x):
+        winner = game(nums[i])
+        if winner == "Maria":
+            maria_wins += 1
+        elif winner == "Ben":
+            ben_wins += 1
+
     if maria_wins > ben_wins:
         return "Maria"
     elif ben_wins > maria_wins:
