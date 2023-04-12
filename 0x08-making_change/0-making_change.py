@@ -15,15 +15,10 @@ def makeChange(coins, total):
     """
     if total <= 0:
         return 0
-    numCoins = len(coins)
-    dcp = [[float('inf')] * (total + 1) for _ in range(numCoins)]
-    for j in range(total + 1):
-        if j % coins[0] == 0:
-            dcp[0][j] = j // coins[0]
-    for i in range(1, numCoins):
-        for j in range(total + 1):
-            if coins[i] > j:
-                dcp[i][j] = dcp[i - 1][j]
-            else:
-                dcp[i][j] = min(dcp[i - 1][j], dcp[i][j - coins[i]] + 1)
-    return dcp[-1][-1] if dcp[-1][-1] != float('inf') else -1
+    n = len(coins)
+    dp = [float('inf')] * (total + 1)
+    dp[0] = 0
+    for i in range(n):
+        for j in range(coins[i], total + 1):
+            dp[j] = min(dp[j], dp[j - coins[i]] + 1)
+    return dp[total] if dp[total] != float('inf') else -1
